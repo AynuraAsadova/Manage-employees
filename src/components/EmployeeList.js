@@ -11,8 +11,6 @@ const EmployeeList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [employeesPerPage] = useState(4);
 
-  // const [deleteAlert, setDeleteAlert] = useState(false);
-
   const [modalIsVisible, setModalIsVisible] = useState(false);
   const toggleModal = (value) => {
     setModalIsVisible((prevState) =>
@@ -53,10 +51,6 @@ const EmployeeList = () => {
           </div>
         </div>
       </div>
-
-      {/* <Alert show={deleteAlert} variant='success'>
-        Deleted
-      </Alert> */}
 
       <table className='table table-striped table-hover'>
         <thead>

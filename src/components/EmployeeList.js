@@ -3,10 +3,11 @@ import PaginationLine from "./Pagination";
 import { EmployeeContext } from "../contexts/EmployeeContext";
 import { useContext, useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
+import { map, slice } from "lodash";
 import AddForm from "./AddForm";
 
 const EmployeeList = () => {
-  const { employees } = useContext(EmployeeContext);
+  const { sortedEmployees } = useContext(EmployeeContext);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [employeesPerPage] = useState(4);
@@ -20,15 +21,16 @@ const EmployeeList = () => {
 
   useEffect(() => {
     toggleModal(false);
-  }, [employees]);
+  }, [sortedEmployees]);
 
   const indexOfLastEmployee = currentPage * employeesPerPage;
   const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
-  const currentEmployees = employees.slice(
+  const currentEmployees = slice(
+    sortedEmployees,
     indexOfFirstEmployee,
     indexOfLastEmployee
   );
-  const totalPagesNum = Math.ceil(employees.length / employeesPerPage);
+  const totalPagesNum = Math.ceil(sortedEmployees.length / employeesPerPage);
 
   return (
     <>
@@ -55,6 +57,7 @@ const EmployeeList = () => {
       <table className='table table-striped table-hover'>
         <thead>
           <tr>
+            <th>Index</th>
             <th>Name</th>
             <th>Email</th>
             <th>Address</th>
@@ -63,8 +66,9 @@ const EmployeeList = () => {
           </tr>
         </thead>
         <tbody>
-          {currentEmployees.map((employee) => (
+          {map(currentEmployees, (employee, index) => (
             <tr key={employee.id}>
+              <td>{index}</td>
               <Employee employee={employee} />
             </tr>
           ))}
@@ -75,7 +79,7 @@ const EmployeeList = () => {
         pages={totalPagesNum}
         setCurrentPage={setCurrentPage}
         currentEmployees={currentEmployees}
-        employees={employees}
+        sortedEmployees={sortedEmployees}
       />
 
       <Modal show={modalIsVisible} onHide={toggleModal}>

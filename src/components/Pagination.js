@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Pagination } from 'react-bootstrap';
 
-const PaginationLine = ({pages, setCurrentPage, currentEmployees, sortedEmployees}) => {
+const PaginationLine = ({pages, setCurrentPage, currentEmployees, employees}) => {
 
     const numOfPages = [];
 
@@ -19,7 +19,7 @@ const PaginationLine = ({pages, setCurrentPage, currentEmployees, sortedEmployee
     return (
 
         <div className="clearfix">
-            <div className="hint-text">Showing <b>{currentEmployees.length}</b> out of <b>{sortedEmployees.length}</b> entries</div>
+            <div className="hint-text">Showing <b>{currentEmployees.length}</b> out of <b>{employees.length}</b> entries</div>
 
         <Pagination>
             <Pagination.Prev className={`${currentButton === 1 ? 'page-item disabled' : 'page-item'}`} 

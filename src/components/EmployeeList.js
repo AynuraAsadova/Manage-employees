@@ -6,7 +6,7 @@ import { Button, Modal } from "react-bootstrap";
 import AddForm from "./AddForm";
 
 const EmployeeList = () => {
-  const { sortedEmployees } = useContext(EmployeeContext);
+  const { employees } = useContext(EmployeeContext);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [employeesPerPage] = useState(4);
@@ -20,15 +20,15 @@ const EmployeeList = () => {
 
   useEffect(() => {
     toggleModal(false);
-  }, [sortedEmployees]);
+  }, [employees]);
 
   const indexOfLastEmployee = currentPage * employeesPerPage;
   const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
-  const currentEmployees = sortedEmployees.slice(
+  const currentEmployees = employees.slice(
     indexOfFirstEmployee,
     indexOfLastEmployee
   );
-  const totalPagesNum = Math.ceil(sortedEmployees.length / employeesPerPage);
+  const totalPagesNum = Math.ceil(employees.length / employeesPerPage);
 
   return (
     <>
@@ -75,7 +75,7 @@ const EmployeeList = () => {
         pages={totalPagesNum}
         setCurrentPage={setCurrentPage}
         currentEmployees={currentEmployees}
-        sortedEmployees={sortedEmployees}
+        employees={employees}
       />
 
       <Modal show={modalIsVisible} onHide={toggleModal}>

@@ -70,7 +70,7 @@ const EmployeeContextProvider = (props) => {
     },
   ]);
 
-  const sortedEmployees = employees.sort((a, b) => (a.name < b.name ? -1 : 1));
+  const sortedEmployees = employees?.sort((a, b) => (a.name < b.name ? -1 : 1));
 
   useEffect(() => {
     const employees = localStorage.getItem("employees");

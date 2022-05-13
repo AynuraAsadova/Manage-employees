@@ -69,13 +69,13 @@ const EmployeeContextProvider = (props) => {
       phone: "(204) 619-5731",
     },
   ]);
-
-  const sortedEmployees = employees?.sort((a, b) => (a.name < b.name ? -1 : 1));
-
+  
   useEffect(() => {
     const employees = localStorage.getItem("employees");
     setEmployees(JSON.parse(employees));
   }, []);
+
+  const sortedEmployees = employees?.sort((a, b) => (a.name < b.name ? -1 : 1));
 
   const addEmployee = (name, email, address, phone) => {
     const addEmployee = [
